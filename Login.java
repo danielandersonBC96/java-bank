@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
 
     JLabel label1, getLabel2, getLabel3;
     JTextField textFieldCard;
     JPasswordField passwordField;
+    JButton button1, button2, button3; // login, cancel, signup
 
     public Login() {
         // Fundo
@@ -53,20 +56,32 @@ public class Login extends JFrame {
         passwordField.setFont(new Font("Arial", Font.BOLD, 14));
         background.add(passwordField);
 
-        // Botões Login e Cancelar
-        JButton loginBtn = new JButton("Login");
-        loginBtn.setBounds(325, 310, 100, 30);
-        loginBtn.setBackground(new Color(0, 128, 255));
-        loginBtn.setForeground(Color.WHITE);
-        loginBtn.setFocusPainted(false);
-        background.add(loginBtn);
+        // Botão Login
+        button1 = new JButton("Login");
+        button1.setBounds(325, 310, 230, 30);
+        button1.setBackground(new Color(0, 128, 255));
+        button1.setForeground(Color.WHITE);
+        button1.setFocusPainted(false);
+        button1.addActionListener(this);
+        background.add(button1);
 
-        JButton cancelBtn = new JButton("Cancel");
-        cancelBtn.setBounds(455, 310, 100, 30);
-        cancelBtn.setBackground(new Color(255, 0, 0));
-        cancelBtn.setForeground(Color.WHITE);
-        cancelBtn.setFocusPainted(false);
-        background.add(cancelBtn);
+        // Botão Cancel
+        button2 = new JButton("Cancel");
+        button2.setBounds(325, 355, 230, 30);
+        button2.setBackground(new Color(255, 0, 0));
+        button2.setForeground(Color.WHITE);
+        button2.setFocusPainted(false);
+        button2.addActionListener(this);
+        background.add(button2);
+
+        // Botão Signup (exemplo extra)
+        button3 = new JButton("Sign Up");
+        button3.setBounds(325, 400, 230, 30);
+        button3.setBackground(new Color(0, 200, 0));
+        button3.setForeground(Color.WHITE);
+        button3.setFocusPainted(false);
+        button3.addActionListener(this);
+        background.add(button3);
 
         // Ícone do cartão
         ImageIcon cardIcon = new ImageIcon(ClassLoader.getSystemResource("icon/card.png"));
@@ -87,7 +102,25 @@ public class Login extends JFrame {
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try {
+            if (e.getSource() == button1) {
+                JOptionPane.showMessageDialog(this, "Login clicado!");
+            } else if (e.getSource() == button2) {
+                JOptionPane.showMessageDialog(this, "Cancel clicado!");
+                System.exit(0);
+            } else if (e.getSource() == button3) {
+                JOptionPane.showMessageDialog(this, "Sign Up clicado!");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         new Login();
     }
+}
+
 }
